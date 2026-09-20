@@ -3,30 +3,37 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "dockerfile-audit"
-version = "1.0.0"
-description = "Static Dockerfile auditor: no daemon, no build, no dependencies."
+name = "dockerfile-hardening-lint"
+version = "0.1.0"
+description = "Static Dockerfile auditor for container hardening: no daemon, no build, no dependencies."
 readme = "README.md"
-requires-python = ">=3.8"
-license = { text = "MIT" }
+requires-python = ">=3.9"
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [{ name = "duke5am" }]
-keywords = ["docker", "dockerfile", "linter", "security", "hardening", "static-analysis"]
+keywords = [
+  "docker", "dockerfile", "container", "linter", "security", "hardening",
+  "static-analysis", "ci",
+]
 classifiers = [
-  "Development Status :: 5 - Production/Stable",
   "Environment :: Console",
   "Intended Audience :: Developers",
-  "License :: OSI Approved :: MIT License",
   "Programming Language :: Python :: 3",
   "Topic :: Security",
   "Topic :: Software Development :: Quality Assurance",
+  "Topic :: System :: Systems Administration",
 ]
+# Standard library only, on purpose: the tool runs where no container runtime
+# is installed, which is the whole point.
 dependencies = []
 
 [project.scripts]
-dockerfile-audit = "dockerfile_audit.cli:main"
+dockerfile-hardening-lint = "dockerfile_audit.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/duke5am/dockerfile-hardening-lint"
+Issues = "https://github.com/duke5am/dockerfile-hardening-lint/issues"
 
 [tool.setuptools]
 packages = ["dockerfile_audit"]
+include-package-data = true

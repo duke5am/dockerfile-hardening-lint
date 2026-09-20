@@ -1,11 +1,14 @@
 # dockerfile-hardening-lint
+
+[![PyPI](https://img.shields.io/pypi/v/dockerfile-hardening-lint)](https://pypi.org/project/dockerfile-hardening-lint/)
+
 A small, dependency-free Dockerfile linter. It reads Dockerfiles as **text** and
 reports concrete problems: a container that will run as root, credentials baked
 into `ENV`/`ARG`, floating base images, apt cache left in a layer, a `RUN` in a
 `scratch` stage (which cannot build at all), and more — each with an explanation
 and a suggested fix.
 
-**No Docker daemon, no build, no network, no dependencies.** Python 3.8+ and the
+**No Docker daemon, no build, no network, no dependencies.** Python 3.9+ and the
 standard library are the whole requirement, which is the point: you can run it in
 a CI job, a pre-commit hook, or on a machine that has never had a container
 runtime installed.
@@ -20,9 +23,15 @@ examples/Dockerfile.insecure
 
 ---
 
-## Install-free usage
+## Install
 
-There is nothing to install. Clone or copy the directory and run it:
+```bash
+pip install dockerfile-hardening-lint      # from PyPI, Python 3.9+
+dockerfile-hardening-lint path/to/Dockerfile
+```
+
+Or run it straight from a clone — there is nothing to install. Clone or copy the
+directory and run it:
 
 ```bash
 # as a module
@@ -38,8 +47,8 @@ python3 -m dockerfile_audit Dockerfile api.Dockerfile
 python3 -m dockerfile_audit .
 ```
 
-`dockerfile-audit` (the console script in `pyproject.toml`) is only needed if you
-choose to `pip install .`; the two commands above never touch pip.
+The pip-installed console script and the two commands above run exactly the same
+code from `dockerfile_audit/cli.py`.
 
 ### Flags
 
